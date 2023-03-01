@@ -10,17 +10,47 @@ using System.Threading.Tasks;
 namespace ZchatServer.Sockets {
     public class Zsocket
     {
+       
         // cancellation token to break the loop inside the tcp listener
         public CancellationTokenSource? Token;
 
         // a list of the current clients connected to the listener
-        public List<TcpClient>? _clients { get; set; }
-        
+        private List<TcpClient>? _clients;
+        public List<TcpClient>? Clients
+        {
+            get
+            {
+                if (_clients != null)
+                {
+                    return _clients;
+                }
+
+                return new List<TcpClient>();
+            }
+            private set { }
+        }
+
         private TcpListener? _listener;
+        private TcpClient adminSocket;
+        public TcpClient AdminSocket
+        {
+            get
+            {
+                if (adminSocket != null)
+                {
+                    return adminSocket;
+                }
+
+                return null;
+            }
+            private set { }
+        }
 
         // represent Port and Ip used by the the listener
         private int ServerPort { get; set; }
+        public int Port { get { return ServerPort; } set { ServerPort = value; } }
         private string ServerIp { get; set; }
+        public string Ip { get { return ServerIp; } set { ServerIp = value; } }
 
         // the instance of zsockets accept a connection string -> ip:port
         public Zsocket(string connection_string)
@@ -29,6 +59,7 @@ namespace ZchatServer.Sockets {
             this.ServerIp = conn_args[0];
             this.ServerPort = int.Parse(conn_args[1]);
             this._clients = new();
+            this.Token = new CancellationTokenSource();
 
         }
 
@@ -46,6 +77,22 @@ namespace ZchatServer.Sockets {
                 this.Token.Cancel();
         }
 
+        // close all the current connections of the listener
+        public void CloseAllConnections()
+        {
+            if (this._clients != null)
+                foreach (var client in this._clients)
+                    client.Close();
+        }
+
+
+        public void CleanUp()
+        {
+            this.CancelToken();
+            this.CloseListener();
+            this.CloseAllConnections();
+        }
+
 
         // create basic tcp server
         public TcpListener CreateTcpListener()
@@ -54,15 +101,35 @@ namespace ZchatServer.Sockets {
             // parsing my own ipAdress using type safe memory checking
             ReadOnlySpan<char> ipBytes = new(this.ServerIp.ToCharArray());
             IPAddress ipAddress = IPAddress.Parse(ipBytes);
+            
             // creating listener
             this._listener = new TcpListener(ipAddress, this.ServerPort);
             if (this._listener == null) {
                 throw new Exception("Listener cannot be created");
             }
-            _listener.Start();
+            this._listener.Start();
             Console.WriteLine("Server is listening");
+            // pushing the HOST socket
+            TcpClient AdminClient = new TcpClient(this.ServerIp, this.ServerPort);
+            this._clients.Add(AdminClient);
+            this.adminSocket = AdminClient;
             return _listener;
         }
+
+        public string ReadFromAdmin()
+        {
+            string result = "";
+
+            if (this.AdminSocket != null)
+            {
+                byte[] buffer = new byte[1024];
+                this.AdminSocket.GetStream().Read(buffer, 0, buffer.Length);
+                result = Encoding.UTF8.GetString(buffer);
+            }
+
+            return result;
+        }
+
 
         // send message to all connected clients
         public void BroadCast(string message) {
@@ -78,25 +145,13 @@ namespace ZchatServer.Sockets {
         }
 
         
-
-        // close all the current connections of the listener
-        public void CloseAllConnections() {
-            if (this._clients != null)
-                foreach (var client in this._clients)
-                    client.Close();
-        }
-
-
-        public void CleanUp()
-        {
-            this.CancelToken();
-            this.CloseListener();
-            this.CloseAllConnections();
-        }
+        
 
         // start listener loop to listen incoming clients connection
-        public async void WaitClients(string message, BindingList<string> binding, Form parentForm)
+        public async void WaitClients(string message, BindingList<string> ipBinds, Form parentForm)
         {
+            if (this.Token == null)
+                throw new Exception("Cancelation Token has not been created");
 
             if (this._listener == null)
                 throw new Exception("No listener server started");
@@ -105,27 +160,28 @@ namespace ZchatServer.Sockets {
                 throw new Exception("this._clients cannot be NULL");
 
             int num = 0;
-            this.Token = new CancellationTokenSource();
+
+           
+            
             await Task.Run(() => {
-                while(true)
+                while(!this.Token.IsCancellationRequested)
                 {
-                    if(this.Token.IsCancellationRequested)
-                        break;
-                    
                     try
                     {
+
                         TcpClient client = this._listener.AcceptTcpClient();
                         this._clients.Add(client);
+
                         // welcome message to all entering users
                         byte[] welcomeMessage = Encoding.ASCII.GetBytes(message);
                         client.GetStream().Write(welcomeMessage, 0, welcomeMessage.Length);
+
                         var ipAddress = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
                         var port = ((IPEndPoint)client.Client.RemoteEndPoint).Port.ToString();
 
                         var newClientString = $"Client {num} with IP {ipAddress}:{port} connected";
-                        parentForm.Invoke(new Action(() => binding.Add(newClientString)));
+                        parentForm.Invoke(new Action(() => ipBinds.Add(newClientString)));
 
-                        Console.WriteLine($"Nuevo cliente conectado -> {ipAddress}:{port}");
                         num++;
 
                     } catch

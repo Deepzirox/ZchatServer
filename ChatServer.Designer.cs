@@ -30,37 +30,29 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatServer));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.ServerInfo = new System.Windows.Forms.ListBox();
             this.CloseServerBtn = new System.Windows.Forms.Button();
             this.ConnectedIps = new System.Windows.Forms.ListBox();
             this.StatusMsg = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.menuStrip3 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.createNewServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToExistingServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.imessagesfield = new System.Windows.Forms.RichTextBox();
+            this.Chat = new System.Windows.Forms.ListBox();
             this.ibuttondelete = new System.Windows.Forms.Button();
             this.ibuttonsend = new System.Windows.Forms.Button();
             this.iprompt = new System.Windows.Forms.RichTextBox();
+            this.UserNameItem = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.menuStrip3.SuspendLayout();
-            this.menuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -72,21 +64,23 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.Black;
+            this.splitContainer1.Panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("splitContainer1.Panel1.BackgroundImage")));
             this.splitContainer1.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.splitContainer1.Panel1.Controls.Add(this.label3);
+            this.splitContainer1.Panel1.Controls.Add(this.UserNameItem);
+            this.splitContainer1.Panel1.Controls.Add(this.ServerInfo);
             this.splitContainer1.Panel1.Controls.Add(this.CloseServerBtn);
             this.splitContainer1.Panel1.Controls.Add(this.ConnectedIps);
             this.splitContainer1.Panel1.Controls.Add(this.StatusMsg);
             this.splitContainer1.Panel1.Controls.Add(this.panel2);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.menuStrip3);
-            this.splitContainer1.Panel1.Controls.Add(this.menuStrip2);
             this.splitContainer1.Panel1.Controls.Add(this.menuStrip1);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Black;
-            this.splitContainer1.Panel2.Controls.Add(this.panel1);
+            this.splitContainer1.Panel2.Controls.Add(this.Chat);
             this.splitContainer1.Panel2.Controls.Add(this.ibuttondelete);
             this.splitContainer1.Panel2.Controls.Add(this.ibuttonsend);
             this.splitContainer1.Panel2.Controls.Add(this.iprompt);
@@ -95,14 +89,27 @@
             this.splitContainer1.SplitterDistance = 553;
             this.splitContainer1.TabIndex = 0;
             // 
+            // ServerInfo
+            // 
+            this.ServerInfo.BackColor = System.Drawing.Color.Indigo;
+            this.ServerInfo.ForeColor = System.Drawing.Color.Lime;
+            this.ServerInfo.FormattingEnabled = true;
+            this.ServerInfo.ItemHeight = 20;
+            this.ServerInfo.Location = new System.Drawing.Point(108, 215);
+            this.ServerInfo.Name = "ServerInfo";
+            this.ServerInfo.Size = new System.Drawing.Size(354, 124);
+            this.ServerInfo.TabIndex = 10;
+            // 
             // CloseServerBtn
             // 
-            this.CloseServerBtn.Location = new System.Drawing.Point(41, 259);
+            this.CloseServerBtn.BackColor = System.Drawing.Color.Transparent;
+            this.CloseServerBtn.ForeColor = System.Drawing.Color.Black;
+            this.CloseServerBtn.Location = new System.Drawing.Point(108, 345);
             this.CloseServerBtn.Name = "CloseServerBtn";
-            this.CloseServerBtn.Size = new System.Drawing.Size(152, 29);
+            this.CloseServerBtn.Size = new System.Drawing.Size(354, 38);
             this.CloseServerBtn.TabIndex = 9;
             this.CloseServerBtn.Text = "Close Server";
-            this.CloseServerBtn.UseVisualStyleBackColor = true;
+            this.CloseServerBtn.UseVisualStyleBackColor = false;
             this.CloseServerBtn.Visible = false;
             this.CloseServerBtn.Click += new System.EventHandler(this.CloseServerBtn_Click);
             // 
@@ -112,16 +119,17 @@
             this.ConnectedIps.ForeColor = System.Drawing.Color.Lime;
             this.ConnectedIps.FormattingEnabled = true;
             this.ConnectedIps.ItemHeight = 20;
-            this.ConnectedIps.Location = new System.Drawing.Point(45, 462);
+            this.ConnectedIps.Location = new System.Drawing.Point(45, 492);
             this.ConnectedIps.Name = "ConnectedIps";
-            this.ConnectedIps.Size = new System.Drawing.Size(465, 144);
+            this.ConnectedIps.Size = new System.Drawing.Size(465, 184);
             this.ConnectedIps.TabIndex = 8;
             // 
             // StatusMsg
             // 
+            this.StatusMsg.BackColor = System.Drawing.Color.Black;
             this.StatusMsg.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.StatusMsg.ForeColor = System.Drawing.Color.Red;
-            this.StatusMsg.Location = new System.Drawing.Point(122, 185);
+            this.StatusMsg.Location = new System.Drawing.Point(122, 144);
             this.StatusMsg.Name = "StatusMsg";
             this.StatusMsg.Size = new System.Drawing.Size(328, 50);
             this.StatusMsg.TabIndex = 7;
@@ -132,7 +140,7 @@
             // 
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Location = new System.Drawing.Point(41, 172);
+            this.panel2.Location = new System.Drawing.Point(465, 649);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(65, 63);
             this.panel2.TabIndex = 6;
@@ -142,7 +150,7 @@
             this.label2.BackColor = System.Drawing.Color.Indigo;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(41, 391);
+            this.label2.Location = new System.Drawing.Point(41, 432);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(469, 36);
             this.label2.TabIndex = 5;
@@ -151,75 +159,15 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Ink Free", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Ink Free", 38F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Lime;
-            this.label1.Location = new System.Drawing.Point(83, 631);
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label1.Location = new System.Drawing.Point(0, 51);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(376, 99);
+            this.label1.Padding = new System.Windows.Forms.Padding(120, 0, 0, 0);
+            this.label1.Size = new System.Drawing.Size(550, 348);
             this.label1.TabIndex = 3;
             this.label1.Text = "ZiroxChat";
-            // 
-            // menuStrip3
-            // 
-            this.menuStrip3.BackColor = System.Drawing.Color.Red;
-            this.menuStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem9});
-            this.menuStrip3.Location = new System.Drawing.Point(0, 102);
-            this.menuStrip3.Name = "menuStrip3";
-            this.menuStrip3.Size = new System.Drawing.Size(553, 51);
-            this.menuStrip3.TabIndex = 2;
-            this.menuStrip3.Text = "menuStrip3";
-            // 
-            // toolStripMenuItem9
-            // 
-            this.toolStripMenuItem9.Font = new System.Drawing.Font("Cascadia Code", 19.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(109, 47);
-            this.toolStripMenuItem9.Text = "Info";
-            // 
-            // menuStrip2
-            // 
-            this.menuStrip2.BackColor = System.Drawing.Color.DarkCyan;
-            this.menuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem5});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 51);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(553, 51);
-            this.menuStrip2.TabIndex = 1;
-            this.menuStrip2.Text = "menuStrip2";
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem6,
-            this.toolStripMenuItem7,
-            this.toolStripMenuItem8});
-            this.toolStripMenuItem5.Font = new System.Drawing.Font("Cascadia Code", 19.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toolStripMenuItem5.ForeColor = System.Drawing.Color.Lime;
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(185, 47);
-            this.toolStripMenuItem5.Text = "Accounts";
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(454, 48);
-            this.toolStripMenuItem6.Text = "toolStripMenuItem2";
-            // 
-            // toolStripMenuItem7
-            // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(454, 48);
-            this.toolStripMenuItem7.Text = "toolStripMenuItem3";
-            // 
-            // toolStripMenuItem8
-            // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(454, 48);
-            this.toolStripMenuItem8.Text = "toolStripMenuItem4";
             // 
             // menuStrip1
             // 
@@ -242,6 +190,7 @@
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2});
             this.toolStripMenuItem1.Font = new System.Drawing.Font("Cascadia Code", 19.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Lime;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(280, 47);
             this.toolStripMenuItem1.Text = "Server config";
@@ -270,26 +219,17 @@
             this.connectToExistingServerToolStripMenuItem.Text = "Connect to existing server";
             this.connectToExistingServerToolStripMenuItem.Click += new System.EventHandler(this.connectToExistingServerToolStripMenuItem_Click);
             // 
-            // panel1
+            // Chat
             // 
-            this.panel1.Controls.Add(this.imessagesfield);
-            this.panel1.Location = new System.Drawing.Point(6, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(816, 440);
-            this.panel1.TabIndex = 8;
-            // 
-            // imessagesfield
-            // 
-            this.imessagesfield.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.imessagesfield.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imessagesfield.Font = new System.Drawing.Font("Cascadia Code", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.imessagesfield.ForeColor = System.Drawing.Color.Black;
-            this.imessagesfield.Location = new System.Drawing.Point(0, 0);
-            this.imessagesfield.Name = "imessagesfield";
-            this.imessagesfield.ReadOnly = true;
-            this.imessagesfield.Size = new System.Drawing.Size(816, 440);
-            this.imessagesfield.TabIndex = 0;
-            this.imessagesfield.Text = "Welcome to Zirox Chat.\n";
+            this.Chat.BackColor = System.Drawing.Color.Indigo;
+            this.Chat.Font = new System.Drawing.Font("Cascadia Code SemiBold", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Chat.ForeColor = System.Drawing.Color.Lime;
+            this.Chat.FormattingEnabled = true;
+            this.Chat.ItemHeight = 35;
+            this.Chat.Location = new System.Drawing.Point(3, 3);
+            this.Chat.Name = "Chat";
+            this.Chat.Size = new System.Drawing.Size(821, 424);
+            this.Chat.TabIndex = 8;
             // 
             // ibuttondelete
             // 
@@ -324,12 +264,34 @@
             this.iprompt.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.iprompt.Font = new System.Drawing.Font("Cascadia Code", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.iprompt.ForeColor = System.Drawing.Color.Black;
-            this.iprompt.Location = new System.Drawing.Point(6, 451);
+            this.iprompt.Location = new System.Drawing.Point(6, 435);
             this.iprompt.Margin = new System.Windows.Forms.Padding(5);
             this.iprompt.Name = "iprompt";
-            this.iprompt.Size = new System.Drawing.Size(816, 302);
+            this.iprompt.Size = new System.Drawing.Size(816, 318);
             this.iprompt.TabIndex = 5;
             this.iprompt.Text = "Escribe algo...";
+            this.iprompt.TextChanged += new System.EventHandler(this.iprompt_TextChanged);
+            // 
+            // UserNameItem
+            // 
+            this.UserNameItem.BackColor = System.Drawing.Color.Indigo;
+            this.UserNameItem.ForeColor = System.Drawing.Color.Lime;
+            this.UserNameItem.Location = new System.Drawing.Point(204, 697);
+            this.UserNameItem.Name = "UserNameItem";
+            this.UserNameItem.Size = new System.Drawing.Size(125, 27);
+            this.UserNameItem.TabIndex = 11;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.Lime;
+            this.label3.Location = new System.Drawing.Point(99, 696);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(99, 28);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Username";
             // 
             // ChatServer
             // 
@@ -347,13 +309,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.menuStrip3.ResumeLayout(false);
-            this.menuStrip3.PerformLayout();
-            this.menuStrip2.ResumeLayout(false);
-            this.menuStrip2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -364,19 +321,10 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem toolStripMenuItem2;
-        private MenuStrip menuStrip3;
-        private ToolStripMenuItem toolStripMenuItem9;
-        private MenuStrip menuStrip2;
-        private ToolStripMenuItem toolStripMenuItem5;
-        private ToolStripMenuItem toolStripMenuItem6;
-        private ToolStripMenuItem toolStripMenuItem7;
-        private ToolStripMenuItem toolStripMenuItem8;
         private Label label1;
         private Button ibuttondelete;
         private Button ibuttonsend;
         private RichTextBox iprompt;
-        private Panel panel1;
-        private RichTextBox imessagesfield;
         private Label label2;
         private ToolStripMenuItem createNewServerToolStripMenuItem;
         private ToolStripMenuItem connectToExistingServerToolStripMenuItem;
@@ -384,5 +332,9 @@
         private Panel panel2;
         private ListBox ConnectedIps;
         private Button CloseServerBtn;
+        private ListBox ServerInfo;
+        private ListBox Chat;
+        private Label label3;
+        private TextBox UserNameItem;
     }
 }

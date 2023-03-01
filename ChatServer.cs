@@ -19,11 +19,15 @@ namespace ZchatServer
         // Create a binding list to store the connected clients' IP addresses
         private BindingList<string> connectedClients = new BindingList<string>();
 
+        // Create a list to bind the chat message field to a AdminSocket
+        private BindingList<string> chat = new BindingList<string>();
+
 
         public ChatServer()
         {
             InitializeComponent();
             ConnectedIps.DataSource = connectedClients;
+            //MessagesList.DataSource = chat;
             this.Zsocketsocket = null;
         }
 
@@ -33,12 +37,14 @@ namespace ZchatServer
         }
 
         // not finished yet
-        private void ibuttonsend_Click(object sender, EventArgs e)
+        private async void ibuttonsend_Click(object sender, EventArgs e)
         {
             string value = iprompt.Text;
+            this.Zsocketsocket.BroadCast(value);
+            Chat.Items.Add(UserNameItem.Text + ": " + this.Zsocketsocket.ReadFromAdmin());
             
-            imessagesfield.SelectionStart = imessagesfield.Text.Length;
-            imessagesfield.ScrollToCaret();
+            //imessagesfield.SelectionStart = imessagesfield.Text.Length;
+            //imessagesfield.ScrollToCaret();
         }
 
         private void ibuttondelete_Click(object sender, EventArgs e)
@@ -53,6 +59,7 @@ namespace ZchatServer
             {
                 this.Zsocketsocket.CleanUp();
                 this.connectedClients.Clear();
+                ServerInfo.Items.Clear();
             }
             CloseServerBtn.Visible = false;
             StatusMsg.Text = "Server disconnected";
@@ -86,6 +93,14 @@ namespace ZchatServer
                 StatusMsg.Text = "Server connected";
                 CloseServerBtn.Visible = true;
                 StatusMsg.ForeColor = Color.Green;
+                if (this.Zsocketsocket.Ip != null)
+                {
+                    ServerInfo.Items.Add($"This is your server info.");
+                    ServerInfo.Items.Add($"IP = {this.Zsocketsocket.Ip}");
+                    ServerInfo.Items.Add($"PORT = {this.Zsocketsocket.Port}");
+                    Chat.Items.Add(this.Zsocketsocket.ReadFromAdmin());
+                }
+               
             }
             csf.socket = null;
             
@@ -136,6 +151,9 @@ namespace ZchatServer
 
         }
 
-        
+        private void iprompt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
