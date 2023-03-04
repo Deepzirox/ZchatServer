@@ -20,12 +20,12 @@ namespace ZchatServer
         public Form parentForm;
 
 
-        public CreateServerForm(BindingList<string> bind, Form parentForm)
+        public CreateServerForm(BindingList<string> bind, BindingList<string> chat, Form parentForm)
         {
             InitializeComponent();
             this.external_binding = bind;
             this.parentForm = parentForm;
-
+            this.chat_binding = chat;
         }
 
         private void CreateServerForm_Load(object sender, EventArgs e)
@@ -37,13 +37,14 @@ namespace ZchatServer
         {
             string ip = ipFvalue.Text;
             string port = portFvalue.Text;
-            string connMsg = ConnMsg.Text;
+            //string connMsg = ConnMsg.Text;
 
             try
             {
                 this.socket = new Zsocket(ip + ":" + port);
                 socket.CreateTcpListener();
-                socket.WaitClients(connMsg, this.external_binding, this.parentForm);
+                //socket.ReadNewData(this.chat_binding, parentForm);
+                socket.WaitClients(this.external_binding, this.chat_binding, this.parentForm);
                 
                 MessageBox.Show("Server is listening");
                 this.DialogResult = DialogResult.OK;

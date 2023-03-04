@@ -34,8 +34,6 @@
             this.portFvalue = new System.Windows.Forms.TextBox();
             this.CreateBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ConnMsg = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -72,7 +70,7 @@
             // 
             // CreateBtn
             // 
-            this.CreateBtn.Location = new System.Drawing.Point(208, 283);
+            this.CreateBtn.Location = new System.Drawing.Point(156, 157);
             this.CreateBtn.Name = "CreateBtn";
             this.CreateBtn.Size = new System.Drawing.Size(88, 29);
             this.CreateBtn.TabIndex = 8;
@@ -82,7 +80,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(108, 283);
+            this.button1.Location = new System.Drawing.Point(23, 157);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 29);
             this.button1.TabIndex = 9;
@@ -90,30 +88,11 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 136);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(149, 20);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Connection message:";
-            // 
-            // ConnMsg
-            // 
-            this.ConnMsg.Location = new System.Drawing.Point(23, 157);
-            this.ConnMsg.Name = "ConnMsg";
-            this.ConnMsg.Size = new System.Drawing.Size(273, 120);
-            this.ConnMsg.TabIndex = 11;
-            this.ConnMsg.Text = "";
-            // 
             // CreateServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(308, 324);
-            this.Controls.Add(this.ConnMsg);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(275, 224);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.CreateBtn);
             this.Controls.Add(this.portFvalue);
@@ -136,7 +115,5 @@
         private TextBox portFvalue;
         private Button CreateBtn;
         private Button button1;
-        private Label label3;
-        private RichTextBox ConnMsg;
     }
 }

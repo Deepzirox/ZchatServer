@@ -27,7 +27,7 @@ namespace ZchatServer
         {
             InitializeComponent();
             ConnectedIps.DataSource = connectedClients;
-            //MessagesList.DataSource = chat;
+            Chat.DataSource = chat;
             this.Zsocketsocket = null;
         }
 
@@ -39,9 +39,14 @@ namespace ZchatServer
         // not finished yet
         private async void ibuttonsend_Click(object sender, EventArgs e)
         {
+            if (this.Zsocketsocket == null)
+                return;
+            string userName = UserName.Text;
             string value = iprompt.Text;
-            this.Zsocketsocket.BroadCast(value);
-            Chat.Items.Add(UserNameItem.Text + ": " + this.Zsocketsocket.ReadFromAdmin());
+            this.Zsocketsocket.BroadCast($"{userName} says: {value}");
+            this.Zsocketsocket.ReadNewData(chat, this);
+            
+            //Chat.Items.Add(UserNameItem.Text + ": " + this.Zsocketsocket.ReadFromAdmin());
             
             //imessagesfield.SelectionStart = imessagesfield.Text.Length;
             //imessagesfield.ScrollToCaret();
@@ -83,7 +88,7 @@ namespace ZchatServer
 
         private async void createNewServerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateServerForm csf = new(this.connectedClients, this);
+            CreateServerForm csf = new(this.connectedClients, this.chat, this);
             DialogResult res = await Task.Run(() => csf.ShowDialog());
             if (csf.socket != null)
                 this.Zsocketsocket = csf.socket;
@@ -98,7 +103,7 @@ namespace ZchatServer
                     ServerInfo.Items.Add($"This is your server info.");
                     ServerInfo.Items.Add($"IP = {this.Zsocketsocket.Ip}");
                     ServerInfo.Items.Add($"PORT = {this.Zsocketsocket.Port}");
-                    Chat.Items.Add(this.Zsocketsocket.ReadFromAdmin());
+                    
                 }
                
             }

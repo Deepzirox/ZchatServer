@@ -4,7 +4,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 
 namespace ZchatServer.Sockets {
@@ -15,20 +17,8 @@ namespace ZchatServer.Sockets {
         public CancellationTokenSource? Token;
 
         // a list of the current clients connected to the listener
-        private List<TcpClient>? _clients;
-        public List<TcpClient>? Clients
-        {
-            get
-            {
-                if (_clients != null)
-                {
-                    return _clients;
-                }
-
-                return new List<TcpClient>();
-            }
-            private set { }
-        }
+        public ConcurrentBag<TcpClient>? _clients;
+        
 
         private TcpListener? _listener;
         private TcpClient adminSocket;
@@ -116,19 +106,6 @@ namespace ZchatServer.Sockets {
             return _listener;
         }
 
-        public string ReadFromAdmin()
-        {
-            string result = "";
-
-            if (this.AdminSocket != null)
-            {
-                byte[] buffer = new byte[1024];
-                this.AdminSocket.GetStream().Read(buffer, 0, buffer.Length);
-                result = Encoding.UTF8.GetString(buffer);
-            }
-
-            return result;
-        }
 
 
         // send message to all connected clients
@@ -144,11 +121,25 @@ namespace ZchatServer.Sockets {
                 }
         }
 
-        
+        public void ReadNewData(BindingList<string> chat, Form parentForm)
+        {
+            if (this.Token == null)
+                return;
+
+            var client = this.adminSocket;
+
+            if (client.Connected)
+            {
+                byte[] msg = new byte[1024];
+                client.GetStream().Read(msg, 0, msg.Length);
+                string newData = Encoding.ASCII.GetString(msg);
+                parentForm.Invoke(new Action(() => chat.Add(newData)));
+            }
+        }
         
 
         // start listener loop to listen incoming clients connection
-        public async void WaitClients(string message, BindingList<string> ipBinds, Form parentForm)
+        public async void WaitClients(BindingList<string> ipBinds, BindingList<string> chat, Form parentForm)
         {
             if (this.Token == null)
                 throw new Exception("Cancelation Token has not been created");
@@ -160,7 +151,7 @@ namespace ZchatServer.Sockets {
                 throw new Exception("this._clients cannot be NULL");
 
             int num = 0;
-
+             
            
             
             await Task.Run(() => {
@@ -168,20 +159,18 @@ namespace ZchatServer.Sockets {
                 {
                     try
                     {
-
+                        
                         TcpClient client = this._listener.AcceptTcpClient();
                         this._clients.Add(client);
 
-                        // welcome message to all entering users
-                        byte[] welcomeMessage = Encoding.ASCII.GetBytes(message);
-                        client.GetStream().Write(welcomeMessage, 0, welcomeMessage.Length);
+                        
 
                         var ipAddress = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
                         var port = ((IPEndPoint)client.Client.RemoteEndPoint).Port.ToString();
 
                         var newClientString = $"Client {num} with IP {ipAddress}:{port} connected";
                         parentForm.Invoke(new Action(() => ipBinds.Add(newClientString)));
-
+                        
                         num++;
 
                     } catch

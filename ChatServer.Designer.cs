@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatServer));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label3 = new System.Windows.Forms.Label();
+            this.UserName = new System.Windows.Forms.TextBox();
             this.ServerInfo = new System.Windows.Forms.ListBox();
             this.CloseServerBtn = new System.Windows.Forms.Button();
             this.ConnectedIps = new System.Windows.Forms.ListBox();
@@ -46,8 +48,6 @@
             this.ibuttondelete = new System.Windows.Forms.Button();
             this.ibuttonsend = new System.Windows.Forms.Button();
             this.iprompt = new System.Windows.Forms.RichTextBox();
-            this.UserNameItem = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -67,7 +67,7 @@
             this.splitContainer1.Panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("splitContainer1.Panel1.BackgroundImage")));
             this.splitContainer1.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.splitContainer1.Panel1.Controls.Add(this.label3);
-            this.splitContainer1.Panel1.Controls.Add(this.UserNameItem);
+            this.splitContainer1.Panel1.Controls.Add(this.UserName);
             this.splitContainer1.Panel1.Controls.Add(this.ServerInfo);
             this.splitContainer1.Panel1.Controls.Add(this.CloseServerBtn);
             this.splitContainer1.Panel1.Controls.Add(this.ConnectedIps);
@@ -88,6 +88,27 @@
             this.splitContainer1.Size = new System.Drawing.Size(1384, 758);
             this.splitContainer1.SplitterDistance = 553;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.Lime;
+            this.label3.Location = new System.Drawing.Point(99, 696);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(99, 28);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Username";
+            // 
+            // UserName
+            // 
+            this.UserName.BackColor = System.Drawing.Color.Indigo;
+            this.UserName.ForeColor = System.Drawing.Color.Lime;
+            this.UserName.Location = new System.Drawing.Point(204, 697);
+            this.UserName.Name = "UserName";
+            this.UserName.Size = new System.Drawing.Size(125, 27);
+            this.UserName.TabIndex = 11;
             // 
             // ServerInfo
             // 
@@ -272,27 +293,6 @@
             this.iprompt.Text = "Escribe algo...";
             this.iprompt.TextChanged += new System.EventHandler(this.iprompt_TextChanged);
             // 
-            // UserNameItem
-            // 
-            this.UserNameItem.BackColor = System.Drawing.Color.Indigo;
-            this.UserNameItem.ForeColor = System.Drawing.Color.Lime;
-            this.UserNameItem.Location = new System.Drawing.Point(204, 697);
-            this.UserNameItem.Name = "UserNameItem";
-            this.UserNameItem.Size = new System.Drawing.Size(125, 27);
-            this.UserNameItem.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.Lime;
-            this.label3.Location = new System.Drawing.Point(99, 696);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 28);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Username";
-            // 
             // ChatServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -335,6 +335,6 @@
         private ListBox ServerInfo;
         private ListBox Chat;
         private Label label3;
-        private TextBox UserNameItem;
+        private TextBox UserName;
     }
 }
