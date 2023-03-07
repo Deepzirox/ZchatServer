@@ -160,5 +160,32 @@ namespace ZchatServer
         {
 
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void toolStripMenuItem1_MouseHover(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void toolStripMenuItem1_MouseDown(object sender, MouseEventArgs e)
+        {
+            BackColor= Color.Red;
+            
+        }
+
+        private void iprompt_Click(object sender, EventArgs e)
+        {
+            iprompt.Text = "";
+        }
     }
 }
