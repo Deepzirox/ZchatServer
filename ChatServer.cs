@@ -23,6 +23,8 @@ namespace ZchatServer
         private BindingList<string> chat = new BindingList<string>();
 
 
+        private bool _firtsClick = true;
+
         public ChatServer()
         {
             InitializeComponent();
@@ -55,7 +57,7 @@ namespace ZchatServer
         private void ibuttondelete_Click(object sender, EventArgs e)
         {
             iprompt.Text = "Escribe algo...";
-            
+            _firtsClick = true;
         }
 
         private void CloseServerBtn_Click(object sender, EventArgs e)
@@ -185,7 +187,32 @@ namespace ZchatServer
 
         private void iprompt_Click(object sender, EventArgs e)
         {
-            iprompt.Text = "";
+            if (_firtsClick)
+            {
+
+                iprompt.Text = "";
+
+                _firtsClick = false; 
+            }
+            
+        }
+
+        private Point _dragOffset;
+
+        private void menuStrip1_MouseDown(object sender, MouseEventArgs e)
+        {
+            _dragOffset = new Point(e.X, e.Y);
+        }
+
+        private void menuStrip1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point newLocation = this.Location;
+                newLocation.X += e.X - _dragOffset.X;
+                newLocation.Y += e.Y - _dragOffset.Y;
+                this.Location = newLocation;
+            }
         }
     }
 }

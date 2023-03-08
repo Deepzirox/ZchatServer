@@ -90,30 +90,31 @@
             this.splitContainer1.Panel2.Controls.Add(this.iprompt);
             this.splitContainer1.Panel2.Controls.Add(this.btnMinimize);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(1250, 570);
-            this.splitContainer1.SplitterDistance = 485;
+            this.splitContainer1.Size = new System.Drawing.Size(1239, 570);
+            this.splitContainer1.SplitterDistance = 480;
             this.splitContainer1.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.Lime;
-            this.label3.Location = new System.Drawing.Point(87, 522);
+            this.label3.Location = new System.Drawing.Point(94, 518);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 21);
+            this.label3.Size = new System.Drawing.Size(111, 26);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Username";
+            this.label3.Text = "Username: ";
             // 
             // UserName
             // 
             this.UserName.BackColor = System.Drawing.Color.Indigo;
+            this.UserName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.UserName.ForeColor = System.Drawing.Color.Lime;
             this.UserName.Location = new System.Drawing.Point(178, 523);
             this.UserName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.UserName.Name = "UserName";
-            this.UserName.Size = new System.Drawing.Size(110, 23);
+            this.UserName.Size = new System.Drawing.Size(110, 16);
             this.UserName.TabIndex = 11;
             // 
             // ServerInfo
@@ -215,13 +216,16 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(485, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(480, 36);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked_1);
+            this.menuStrip1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseDown);
+            this.menuStrip1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseMove);
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.BackColor = System.Drawing.Color.Transparent;
             this.toolStripMenuItem1.Checked = true;
             this.toolStripMenuItem1.CheckOnClick = true;
             this.toolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -270,7 +274,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnClose.ForeColor = System.Drawing.Color.Lime;
-            this.btnClose.Location = new System.Drawing.Point(728, 4);
+            this.btnClose.Location = new System.Drawing.Point(735, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(17, 25);
             this.btnClose.TabIndex = 9;
@@ -298,7 +302,7 @@
             this.ibuttondelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ibuttondelete.Font = new System.Drawing.Font("Cascadia Code SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ibuttondelete.ForeColor = System.Drawing.Color.Lime;
-            this.ibuttondelete.Location = new System.Drawing.Point(403, 533);
+            this.ibuttondelete.Location = new System.Drawing.Point(403, 523);
             this.ibuttondelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ibuttondelete.Name = "ibuttondelete";
             this.ibuttondelete.Size = new System.Drawing.Size(144, 26);
@@ -313,7 +317,7 @@
             this.ibuttonsend.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ibuttonsend.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ibuttonsend.ForeColor = System.Drawing.Color.Lime;
-            this.ibuttonsend.Location = new System.Drawing.Point(553, 533);
+            this.ibuttonsend.Location = new System.Drawing.Point(553, 523);
             this.ibuttonsend.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ibuttonsend.Name = "ibuttonsend";
             this.ibuttonsend.Size = new System.Drawing.Size(155, 26);
@@ -329,10 +333,10 @@
             this.iprompt.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.iprompt.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.iprompt.ForeColor = System.Drawing.Color.MediumBlue;
-            this.iprompt.Location = new System.Drawing.Point(3, 302);
+            this.iprompt.Location = new System.Drawing.Point(3, 294);
             this.iprompt.Margin = new System.Windows.Forms.Padding(4);
             this.iprompt.Name = "iprompt";
-            this.iprompt.Size = new System.Drawing.Size(714, 265);
+            this.iprompt.Size = new System.Drawing.Size(719, 265);
             this.iprompt.TabIndex = 5;
             this.iprompt.Text = "Escribe algo...";
             this.iprompt.Click += new System.EventHandler(this.iprompt_Click);
@@ -344,7 +348,7 @@
             this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMinimize.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnMinimize.ForeColor = System.Drawing.Color.Lime;
-            this.btnMinimize.Location = new System.Drawing.Point(726, 25);
+            this.btnMinimize.Location = new System.Drawing.Point(733, 34);
             this.btnMinimize.Name = "btnMinimize";
             this.btnMinimize.Size = new System.Drawing.Size(19, 26);
             this.btnMinimize.TabIndex = 10;
@@ -357,7 +361,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(1250, 570);
+            this.ClientSize = new System.Drawing.Size(1239, 570);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
